@@ -29,7 +29,36 @@ const lines = [
   },
 ]
 
-export function Lines() {
+const stations = [
+  {
+    value: "1",
+    label: "Bt Caves",
+  },
+  {
+    value: "21",
+    label: "Gombak",
+  },
+  {
+    value: "3",
+    label: "Shah Alam",
+  },
+]
+
+export function Search(data:any) {
+  let title:string = ''
+  let contents = lines
+
+  if (data.title === 'lines') {
+    contents = lines
+    title = "Select " + data.title
+  } else if (data.title === 'from') {
+    contents = stations
+    title = "From station"
+  } else if (data.title === 'to') {
+    contents = stations
+    title = "To station"
+  }
+
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
@@ -43,32 +72,32 @@ export function Lines() {
           className="w-full justify-between"
         >
           {value
-            ? lines.find((line) => line.value === value)?.label
-            : "Select Lines..."}
+            ? contents.find((content) => content.value === value)?.label
+            : `${title} ...`}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search line..." />
-          <CommandEmpty>No line found.</CommandEmpty>
+          <CommandInput placeholder={`Search ${data.title}...`} />
+          <CommandEmpty>Not found.</CommandEmpty>
           <CommandGroup>
-            {lines.map((line) => (
+            {contents.map((content) => (
               <CommandItem
-                key={line.value}
-                value={line.value}
+                key={content.value}
+                value={content.label}
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue)
+                  setValue(currentValue === value ? "" : content.value)
                   setOpen(false)
                 }}
               >
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === line.value ? "opacity-100" : "opacity-0"
+                    value === content.value ? "opacity-100" : "opacity-0"
                   )}
                 />
-                {line.label}
+                {content.label}
               </CommandItem>
             ))}
           </CommandGroup>
