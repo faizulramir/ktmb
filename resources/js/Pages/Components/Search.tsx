@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
 
@@ -17,45 +15,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/Components/ui/popover"
+import { useEffect } from "react"
 
-const lines = [
-  {
-    value: "btc-t",
-    label: "Bt Caves - Tampin",
-  },
-  {
-    value: "tm-pk",
-    label: "Tg Malim - Pel Klang",
-  },
-]
-
-const stations = [
-  {
-    value: "1",
-    label: "Bt Caves",
-  },
-  {
-    value: "21",
-    label: "Gombak",
-  },
-  {
-    value: "3",
-    label: "Shah Alam",
-  },
-]
-
-export function Search(data:any) {
+export function Search(props:any) {
   let title:string = ''
-  let contents = lines
+  let contents:any[] = []
 
-  if (data.title === 'lines') {
-    contents = lines
-    title = "Select " + data.title
-  } else if (data.title === 'from') {
-    contents = stations
+  contents = props.contents
+  
+  if (props.title === 'lines') {
+    title = "Select " + props.title
+  } else if (props.title === 'from') {
     title = "From station"
-  } else if (data.title === 'to') {
-    contents = stations
+  } else if (props.title === 'to') {
     title = "To station"
   }
 
@@ -70,6 +42,7 @@ export function Search(data:any) {
           role="combobox"
           aria-expanded={open}
           className="w-full justify-between"
+          disabled={props.disabled}
         >
           {value
             ? contents.find((content) => content.value === value)?.label
@@ -77,17 +50,29 @@ export function Search(data:any) {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent className="w-[200px] md:[300px] lg:w-[300px] p-0">
         <Command>
-          <CommandInput placeholder={`Search ${data.title}...`} />
+          <CommandInput placeholder={`Search ${props.title}...`} />
           <CommandEmpty>Not found.</CommandEmpty>
-          <CommandGroup>
-            {contents.map((content) => (
+          <CommandGroup className="h-[100px] overflow-auto">
+            {contents.map((content, i) => (
               <CommandItem
-                key={content.value}
+                key={i}
                 value={content.label}
+                disabled={content.disabled}
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? "" : content.value)
+                  
+                  if (props.title === 'lines') {
+                    props.setLines(currentValue === value ? "" : content.value)
+                    props.setFrom("")
+                  } else if (props.title === 'from') {
+                    props.setFrom(currentValue === value ? "" : content.value)
+                    props.setTo("")
+                  } else if (props.title === 'to') {
+                    props.setTo(currentValue === value ? "" : content.value)
+                  }
+
                   setOpen(false)
                 }}
               >
