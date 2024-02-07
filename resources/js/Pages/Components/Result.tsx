@@ -56,7 +56,7 @@ const data = [
   },
 ]
  
-export function Result() {
+export function Result(props:any) {
   const [goal, setGoal] = React.useState(350)
  
   function onClick(adjustment: number) {
@@ -66,7 +66,7 @@ export function Result() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button>Route Me!</Button>
+        <Button disabled={props.disabled}>Route Me!</Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">

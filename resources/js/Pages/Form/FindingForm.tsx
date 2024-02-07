@@ -18,7 +18,7 @@ export default function FindingForm(props:any) {
     const [toStations, setToStations] = useState<any[]>([])
     const [allStations, setAllStations] = useState("")
     const [toKey, setToKey] = useState(1)
-    const [linesKey, setLinesKey] = useState(2)
+    const [linesKey, setLinesKey] = useState(20)
 
     const roadlines = [
         {
@@ -100,19 +100,15 @@ export default function FindingForm(props:any) {
         }
     }, [lines])
 
-    const clickHandler = () => {
-
-    }
-
     return (
         <>
             <Search title="lines" initial={initialState} lines={lines} contents={roadlines} setLines={setLines} setFrom={setFrom}/>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-8 mt-2">
-                <Search title="from" key={lines ? linesKey : 2} contents={fromStations} setFrom={setFrom} from={from} setTo={setTo} disabled={disabled} setDisabled={setDisabled}/>
+                <Search title="from" key={lines ? linesKey : 20} contents={fromStations} setFrom={setFrom} from={from} setTo={setTo} disabled={disabled} setDisabled={setDisabled}/>
                 <Search title="to" key={from ? toKey : 1} contents={toStations} setTo={setTo} disabled={disabled} setDisabled={setDisabled}/>
             </div>
             <div className="text-center mt-4">
-                <Result/>
+                <Result disabled={from && to && lines ? false  : true}/>
             </div>
         </>
     )
