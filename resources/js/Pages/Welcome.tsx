@@ -23,7 +23,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                         {
                             !parentLoad ? 
                                 <Loading setParentLoad={setParentLoad}/> 
-                            :   <FindingForm searchDisabled={true} setSearchDisabled={setSearchDisabled}/>
+                            :   <FindingForm searchDisabled={searchDisabled} setSearchDisabled={setSearchDisabled}/>
                         }
                     </div>
                 </div>
