@@ -21,6 +21,7 @@ export default function FindingForm(props:any) {
     const [toKey, setToKey] = useState(1)
     const [linesKey, setLinesKey] = useState(20)
     const [detail, setDetail] = useState(false)
+    const [moreDetail, setMoreDetail] = useState<any[]>([])
 
     const roadlines = [
         {
@@ -140,9 +141,10 @@ export default function FindingForm(props:any) {
                     lines={lines}
                     allStations={allStations}
                     setDetail={setDetail}
+                    setMoreDetail={setMoreDetail}
                 />
 
-                { detail && <Detail openDetail={true} setDetail={setDetail}/> }
+                { detail && <Detail openDetail={true} setDetail={setDetail} moreDetail={moreDetail} /> }
             </div>
         </>
     )

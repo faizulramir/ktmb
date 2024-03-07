@@ -19,7 +19,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
                         <img src="/icon.png" alt="" />
                     </div>
 
-                    <div className={`mt-16 ${!parentLoad ? 'mt-60 lg:mt-48 md:mt-48' : ''}`}>
+                    <div className={`${!parentLoad ? 'mt-80 lg:mt-60 md:mt-60' : 'mt-20'}`}>
                         {
                             !parentLoad ? 
                                 <Loading setParentLoad={setParentLoad}/> 

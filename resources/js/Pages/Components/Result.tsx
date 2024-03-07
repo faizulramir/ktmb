@@ -26,50 +26,58 @@ export function Result(props:any) {
     setOpen(false)
   }
 
-  function countDownIncoming(timer:any) {
-    var timeleft = 10;
-    var downloadTimer = setInterval(function(){
-      if(timeleft <= 0){
-        clearInterval(downloadTimer);
-      }
-      // document.getElementById("progressBar").value = 10 - timeleft;
-      console.log(timeleft)
-      timeleft -= 1;
-    }, 1000);
-  }
+  // function countDownIncoming(timer:any) {
+  //   var timeleft = 10;
+  //   var downloadTimer = setInterval(function(){
+  //     if(timeleft <= 0){
+  //       clearInterval(downloadTimer);
+  //     }
+  //     // document.getElementById("progressBar").value = 10 - timeleft;
+  //     console.log(timeleft)
+  //     timeleft -= 1;
+  //   }, 1000);
+  // }
 
-  if (!props.disabled && open) {
-    var currentDate = new Date();
-    var hour = currentDate.getHours();
-    var minute = currentDate.getMinutes();
-    // var second = currentDate.getSeconds();
-    var time = hour + ":" + minute
+  React.useEffect(() => {
+    if (!props.disabled && open) {
+      var currentDate = new Date();
+      var hour = currentDate.getHours();
+      var minute = currentDate.getMinutes();
+      var time = hour + ":" + minute
+  
+      var stations:any = []
+      props.allStations.forEach((station:any) => {
+        var stationTo = station[props.to];
+        if (stationTo.length < 5 && stationTo !== "") {
+          stationTo = "0" + stationTo
+        }
+  
+        if (stationTo > time && stationTo !== "") stations.push({
+          trainNo: station['Nombor Tren'],
+          tripNo: station['Nombor Trip'],
+          timer: stationTo
+        })
+      });
 
-    var stations:any = []
-    props.allStations.forEach((station:any) => {
-      var stationTo = station[props.to];
-      if (stationTo.length < 5 && stationTo !== "") {
-        stationTo = "0" + stationTo
-      }
+      let timeNow1 = moment(stations[0].timer, "HH:mm");
+      let timeNow2 = moment(time, "HH:mm");
 
-      if (stationTo > time && stationTo !== "") stations.push({
-        trainNo: station['Nombor Tren'],
-        tripNo: station['Nombor Trip'],
-        timer: stationTo
-      })
-    });
+      var nowTrainTimer = moment.duration(timeNow1.diff(timeNow2));
+      setNowTrain(nowTrainTimer.asMinutes())
 
-    // ==console.log(stations);
-    let time1 = moment(stations[0].timer, "HH:mm");
-    let time2 = moment(time, "HH:mm");
+      let timeNext1 = moment(stations[1].timer, "HH:mm");
+      let timeNext2 = moment(time, "HH:mm");
 
-    var d = moment.duration(time1.diff(time2));
-    console.log(d.asMinutes());
-    // let subtract = time1.subtract(time2);
+      var nextTrainTimer = moment.duration(timeNext1.diff(timeNext2));
+      setNextTrain(nextTrainTimer.asMinutes())
 
-    // let format = moment(subtract).format("hh:mm:ss")
-    // console.log(format); //08:56:45
-  }
+      props.setMoreDetail(stations)
+    }
+  }, [open])
+
+  
+
+    
   
   return (
     <Drawer open={open} onOpenChange={setOpen}>
