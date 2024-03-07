@@ -59,8 +59,12 @@ export function Result(props:any) {
       })
     });
 
-    let time1 = moment(stations[0].timer, "hh:mm:ss");
-    let time2 = moment(time, "hh:mm:ss");
+    // ==console.log(stations);
+    let time1 = moment(stations[0].timer, "HH:mm");
+    let time2 = moment(time, "HH:mm");
+
+    var d = moment.duration(time1.diff(time2));
+    console.log(d.asMinutes());
     // let subtract = time1.subtract(time2);
 
     // let format = moment(subtract).format("hh:mm:ss")
