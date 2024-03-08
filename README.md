@@ -2,6 +2,7 @@
 
 <h4 align="center">Routes</h4>
 <p align="center">Showcasing a KTMB timetable using shadcn/ui in Laravel Inertia.</p>
+<p align="center">Data extracted from <a href="https://www.ktmb.com.my/traintime.html" target="_blank">KTMB</a> official website.</p>
 <p align="center"><a href="https://routes.fzlxtech.my" target="_blank">https://routes.fzlxtech.my</a></p>
 
 # Sample Image
