@@ -88,7 +88,7 @@ export default function FindingForm(props:any) {
                 contents={roadlines} 
                 setLines={setLines} 
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-8 mt-2">
+            <div className="mt-2">
                 <Search 
                     title="station" 
                     key={toKey} 
