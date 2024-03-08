@@ -17,6 +17,7 @@ export default function FindingForm(props:any) {
     const [toStations, setToStations] = useState<any[]>([])
     const [allStations, setAllStations] = useState("")
     const [toKey, setToKey] = useState(1)
+    const [resetKey, setResetKey] = useState(1)
     const [linesKey, setLinesKey] = useState(20)
     const [detail, setDetail] = useState(false)
     const [moreDetail, setMoreDetail] = useState<any[]>([])
@@ -29,13 +30,23 @@ export default function FindingForm(props:any) {
         },
         {
           value: "bc",
-          label: "Bt Caves - Tampin",
+          label: "Bt Caves - Pulau Sebang",
           disabled: false
+        },
+        {
+            value: "ps",
+            label: " Pulau Sebang - Bt Caves",
+            disabled: false
         },
         {
           value: "tm",
           label: "Tg Malim - Pel Klang",
           disabled: false
+        },
+        {
+            value: "pk",
+            label: "Pel Klang - Tg Malim",
+            disabled: false
         },
     ]
 
@@ -74,8 +85,10 @@ export default function FindingForm(props:any) {
         if (lines !== "") {
             getAllStations()
             setLinesKey(linesKey + 2)
+            setTo("")
         } else {
             setDisabled(true)
+            setTo("")
         }
     }, [lines])
 
@@ -91,7 +104,7 @@ export default function FindingForm(props:any) {
             <div className="mt-2">
                 <Search 
                     title="station" 
-                    key={toKey} 
+                    key={linesKey} 
                     contents={toStations} 
                     setTo={setTo} 
                     disabled={disabled} 
@@ -103,12 +116,14 @@ export default function FindingForm(props:any) {
                     disabled={to && lines ? false  : true} 
                     to={to}
                     lines={lines}
+                    setResetKey={setResetKey}
+                    resetKey={resetKey}
                     allStations={allStations}
                     setDetail={setDetail}
                     setMoreDetail={setMoreDetail}
                 />
 
-                { detail && <Detail openDetail={true} setDetail={setDetail} moreDetail={moreDetail} /> }
+                { detail && <Detail key={linesKey} openDetail={true} setDetail={setDetail} moreDetail={moreDetail} /> }
             </div>
         </>
     )

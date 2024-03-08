@@ -24,7 +24,7 @@ export function Detail(props:any) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Train in schedule.</SheetTitle>
+          <SheetTitle>Train schedule.</SheetTitle>
           <DetailData moreDetail={props.moreDetail} key={resetKey}/>
         </SheetHeader>
       </SheetContent>
