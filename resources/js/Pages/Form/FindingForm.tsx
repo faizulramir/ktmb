@@ -12,10 +12,8 @@ const initialState = ""
 export default function FindingForm(props:any) {
     const [disabled, setDisabled] = useState(props.searchDisabled)
     const [lines, setLines] = useState("")
-    const [from, setFrom] = useState("")
     const [to, setTo] = useState("")
     const [loadingData, setLoadingData] = useState(false)
-    const [fromStations, setFromStations] = useState<any[]>([])
     const [toStations, setToStations] = useState<any[]>([])
     const [allStations, setAllStations] = useState("")
     const [toKey, setToKey] = useState(1)
@@ -65,34 +63,12 @@ export default function FindingForm(props:any) {
                     })
                 }
             })
-            setFromStations(stationsArray)
             setToStations(stationsArray)
             setDisabled(false)
         } else {
             setDisabled(true)
         }
     };
-      
-    useEffect(() => {
-        if (from !== "") {
-            let stationIndex = toStations.findIndex(station => station.value === from)
-            setToStations([...toStations.map((station, index) => {
-                if (index > stationIndex) {
-                    return {
-                       ...station,
-                        disabled: false
-                    }
-                } else {
-                    return {
-                        ...station,
-                        disabled: true
-                     }
-                }
-            })])
-
-            setToKey(toKey + 1)
-        }
-    }, [from])
 
     useEffect(() => {
         if (lines !== "") {
@@ -111,22 +87,11 @@ export default function FindingForm(props:any) {
                 lines={lines} 
                 contents={roadlines} 
                 setLines={setLines} 
-                setFrom={setFrom}
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-8 mt-2">
                 <Search 
-                    title="from" 
-                    key={lines ? linesKey : 20} 
-                    contents={fromStations} 
-                    setFrom={setFrom} 
-                    from={from} 
-                    setTo={setTo} 
-                    disabled={disabled} 
-                    setDisabled={setDisabled}
-                />
-                <Search 
-                    title="to" 
-                    key={from ? toKey : 1} 
+                    title="station" 
+                    key={toKey} 
                     contents={toStations} 
                     setTo={setTo} 
                     disabled={disabled} 
@@ -135,8 +100,7 @@ export default function FindingForm(props:any) {
             </div>
             <div className="text-center mt-4">
                 <Result 
-                    disabled={from && to && lines ? false  : true} 
-                    from={from}
+                    disabled={to && lines ? false  : true} 
                     to={to}
                     lines={lines}
                     allStations={allStations}

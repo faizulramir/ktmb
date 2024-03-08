@@ -25,13 +25,7 @@ export function Search(props:any) {
 
   contents = props.contents
   
-  if (props.title === 'lines') {
-    title = "Select " + props.title
-  } else if (props.title === 'from') {
-    title = "From station"
-  } else if (props.title === 'to') {
-    title = "To station"
-  }
+  title = "Select " + props.title
 
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
@@ -69,11 +63,7 @@ export function Search(props:any) {
                     
                     if (props.title === 'lines') {
                       props.setLines(currentValue === value ? "" : content.value)
-                      props.setFrom("")
-                    } else if (props.title === 'from') {
-                      props.setFrom(currentValue === value ? "" : content.value)
-                      props.setTo("")
-                    } else if (props.title === 'to') {
+                    } else if (props.title === 'station') {
                       props.setTo(currentValue === value ? "" : content.value)
                     }
 

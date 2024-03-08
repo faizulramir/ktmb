@@ -1,6 +1,4 @@
 import * as React from "react"
-import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
-import { Bar, BarChart, ResponsiveContainer } from "recharts"
 import { Button } from "@/Components/ui/button"
 import moment from 'moment'
 
@@ -14,7 +12,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/Components/ui/drawer"
-import { count } from "console"
  
 export function Result(props:any) {
   const [nowTrain, setNowTrain] = React.useState(300)
@@ -75,10 +72,6 @@ export function Result(props:any) {
     }
   }, [open])
 
-  
-
-    
-  
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
