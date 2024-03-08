@@ -122,9 +122,8 @@ export default function FindingForm(props:any) {
                     setDetail={setDetail}
                     setMoreDetail={setMoreDetail}
                 />
-
-                { detail && <Detail key={linesKey} openDetail={true} setDetail={setDetail} moreDetail={moreDetail} /> }
             </div>
+            { detail && <Detail key={linesKey} openDetail={true} setDetail={setDetail} moreDetail={moreDetail} /> }
         </>
     )
 }

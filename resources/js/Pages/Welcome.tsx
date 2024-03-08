@@ -13,7 +13,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<
     return (
         <>
             <Head />
-            <div className="flex h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+            <div className="flex h-dvh bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                 <div className="m-auto p-6 lg:p-8 w-full lg:w-2/5 md:w-4/5">
                     <div className="flex justify-center w-1/4 m-auto animate-bounce">
                         <img src="/icon.png" alt="" />
