@@ -48,7 +48,7 @@ export function Search(props:any) {
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] md:[300px] lg:w-[300px] p-0">
+        <PopoverContent className="w-dvh p-0">
           <Command>
             <CommandInput placeholder={`Search ${props.title}...`} />
             <CommandEmpty>Not found.</CommandEmpty>
