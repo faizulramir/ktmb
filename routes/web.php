@@ -24,9 +24,15 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
 
-Route::get('/data/{lines}', [DataController::class, 'getData'])->name('data.get');
+Route::get('/blog/{slug}', function () {
+    return Inertia::render('Blog');
+})->name('blog.show');
+
+Route::get('/project/{slug}', function () {
+    return Inertia::render('Project');
+})->name('project.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
