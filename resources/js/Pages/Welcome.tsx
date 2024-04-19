@@ -1,17 +1,32 @@
-import Nav from './Components/Nav';
+import { Link, Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
-import Hero from './Components/Home/Hero';
+import { Search } from './Components/Search';
+import FindingForm from './Form/FindingForm';
+import { Loading } from './Components/Loading';
+import { useState } from 'react';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
     
+    const [parentLoad, setParentLoad] = useState(false);
+    const [searchDisabled, setSearchDisabled] = useState(true);
 
     return (
         <>
-            <div className="flex min-h-screen w-full flex-col">
-                <Nav data="home"/>
-                <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
-                    <Hero/>
-                </main>
+            <Head />
+            <div className="flex h-dvh bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+                <div className="m-auto p-6 lg:p-8 w-full lg:w-2/5 md:w-4/5">
+                    <div className="flex justify-center w-1/4 m-auto animate-bounce">
+                        <img src="/icon.png" alt="" />
+                    </div>
+
+                    <div className={`${!parentLoad ? 'mt-64 lg:mt-60 md:mt-60' : 'mt-20'}`}>
+                        {
+                            !parentLoad ? 
+                                <Loading setParentLoad={setParentLoad}/> 
+                            :   <FindingForm searchDisabled={searchDisabled} setSearchDisabled={setSearchDisabled}/>
+                        }
+                    </div>
+                </div>
             </div>
         </>
     );
